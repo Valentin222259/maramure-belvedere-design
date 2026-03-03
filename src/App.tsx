@@ -13,6 +13,13 @@ import Booking from "./pages/Booking";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
+import AdminLayout from "./components/admin/AdminLayout";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminBookings from "./pages/admin/AdminBookings";
+import AdminRooms from "./pages/admin/AdminRooms";
+import AdminImages from "./pages/admin/AdminImages";
+import AdminAnalytics from "./pages/admin/AdminAnalytics";
+import AdminSettings from "./pages/admin/AdminSettings";
 
 const queryClient = new QueryClient();
 
@@ -22,18 +29,86 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Navbar />
         <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/rooms" element={<Rooms />} />
-          <Route path="/rooms/:id" element={<RoomDetail />} />
-          <Route path="/booking" element={<Booking />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/login" element={<Login />} />
+          {/* Public pages */}
+          <Route
+            path="/"
+            element={
+              <>
+                <Navbar />
+                <Index />
+                <Footer />
+                <ChatBot />
+              </>
+            }
+          />
+          <Route
+            path="/rooms"
+            element={
+              <>
+                <Navbar />
+                <Rooms />
+                <Footer />
+                <ChatBot />
+              </>
+            }
+          />
+          <Route
+            path="/rooms/:id"
+            element={
+              <>
+                <Navbar />
+                <RoomDetail />
+                <Footer />
+                <ChatBot />
+              </>
+            }
+          />
+          <Route
+            path="/booking"
+            element={
+              <>
+                <Navbar />
+                <Booking />
+                <Footer />
+                <ChatBot />
+              </>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <>
+                <Navbar />
+                <Contact />
+                <Footer />
+                <ChatBot />
+              </>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <>
+                <Navbar />
+                <Login />
+                <Footer />
+              </>
+            }
+          />
+
+          {/* Admin pages */}
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="bookings" element={<AdminBookings />} />
+            <Route path="rooms" element={<AdminRooms />} />
+            <Route path="images" element={<AdminImages />} />
+            <Route path="analytics" element={<AdminAnalytics />} />
+            <Route path="settings" element={<AdminSettings />} />
+          </Route>
+
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <Footer />
-        <ChatBot />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

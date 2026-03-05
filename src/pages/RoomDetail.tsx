@@ -3,11 +3,20 @@ import { rooms } from "@/data/rooms";
 import { Button } from "@/components/ui/button";
 import { Star, Check, Eye } from "lucide-react";
 import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import heroImage from "@/assets/hero-mountains.jpg";
 
 const RoomDetail = () => {
   const { id } = useParams();
   const room = rooms.find((r) => r.id === id);
   const [selectedImage, setSelectedImage] = useState(0);
+  const [tourOpen, setTourOpen] = useState(false);
 
   if (!room) {
     return (
@@ -40,8 +49,11 @@ const RoomDetail = () => {
                 <img src={img} alt="" className="w-full h-full object-cover" />
               </button>
             ))}
-            {/* 360° placeholder */}
-            <button className="w-20 h-14 rounded border-2 border-dashed border-border flex items-center justify-center text-muted-foreground hover:border-primary transition-colors">
+            {/* 360° button */}
+            <button
+              onClick={() => setTourOpen(true)}
+              className="w-20 h-14 rounded border-2 border-dashed border-border flex items-center justify-center text-muted-foreground hover:border-primary hover:text-primary transition-colors"
+            >
               <Eye size={16} />
               <span className="text-[10px] ml-1">360°</span>
             </button>
@@ -72,7 +84,7 @@ const RoomDetail = () => {
                   <div className="flex items-center gap-2 mb-2">
                     <div className="flex gap-0.5">
                       {Array.from({ length: r.rating }).map((_, j) => (
-                        <Star key={j} size={14} className="fill-gold text-gold" />
+                        <Star key={j} size={14} className="fill-primary text-primary" />
                       ))}
                     </div>
                     <span className="font-heading text-sm">{r.name}</span>
@@ -95,6 +107,28 @@ const RoomDetail = () => {
           </div>
         </div>
       </div>
+
+      {/* 360° Virtual Tour Modal */}
+      <Dialog open={tourOpen} onOpenChange={setTourOpen}>
+        <DialogContent className="sm:max-w-2xl">
+          <DialogHeader>
+            <DialogTitle className="font-heading text-2xl">360° Virtual Tour</DialogTitle>
+            <DialogDescription>
+              Immersive room experience for {room.name}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="rounded-lg overflow-hidden">
+            <img
+              src={heroImage}
+              alt="Virtual tour placeholder — mountain landscape"
+              className="w-full h-64 md:h-80 object-cover"
+            />
+          </div>
+          <p className="text-sm text-muted-foreground text-center leading-relaxed">
+            Interactive 360° tour will be available after the professional photography session. In the meantime, explore our gallery above.
+          </p>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

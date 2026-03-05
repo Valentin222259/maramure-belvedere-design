@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { rooms } from "@/data/rooms";
@@ -21,13 +21,36 @@ const Booking = () => {
   const update = (field: string, value: string) =>
     setForm((f) => ({ ...f, [field]: value }));
 
+  const today = new Date().toISOString().split("T")[0];
+
+  const dateErrors = useMemo(() => {
+    const errors: { checkIn?: string; checkOut?: string } = {};
+    if (form.checkIn && form.checkIn < today) {
+      errors.checkIn = "Check-in date cannot be in the past.";
+    }
+    if (form.checkIn && form.checkOut && form.checkOut <= form.checkIn) {
+      errors.checkOut = "Check-out date must be after check-in date.";
+    }
+    return errors;
+  }, [form.checkIn, form.checkOut, today]);
+
   const nights =
-    form.checkIn && form.checkOut
+    form.checkIn && form.checkOut && !dateErrors.checkIn && !dateErrors.checkOut
       ? Math.max(1, Math.ceil((new Date(form.checkOut).getTime() - new Date(form.checkIn).getTime()) / 86400000))
       : 1;
 
+  const isFormValid =
+    form.name.trim() !== "" &&
+    form.email.trim() !== "" &&
+    form.phone.trim() !== "" &&
+    form.checkIn !== "" &&
+    form.checkOut !== "" &&
+    !dateErrors.checkIn &&
+    !dateErrors.checkOut;
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isFormValid) return;
     toast({ title: "Booking Submitted!", description: "We'll confirm your reservation via email shortly." });
   };
 
@@ -63,20 +86,32 @@ const Booking = () => {
                 <input
                   type="date"
                   required
+                  min={today}
                   value={form.checkIn}
                   onChange={(e) => update("checkIn", e.target.value)}
-                  className="w-full bg-muted border border-border rounded-md px-4 py-2.5 text-sm text-foreground outline-none focus:ring-1 focus:ring-ring"
+                  className={`w-full bg-muted border rounded-md px-4 py-2.5 text-sm text-foreground outline-none focus:ring-1 focus:ring-ring ${
+                    dateErrors.checkIn ? "border-destructive" : "border-border"
+                  }`}
                 />
+                {dateErrors.checkIn && (
+                  <p className="text-xs text-destructive mt-1">{dateErrors.checkIn}</p>
+                )}
               </div>
               <div>
                 <label className="text-xs uppercase tracking-wider text-muted-foreground mb-1 block">Check-out</label>
                 <input
                   type="date"
                   required
+                  min={form.checkIn || today}
                   value={form.checkOut}
                   onChange={(e) => update("checkOut", e.target.value)}
-                  className="w-full bg-muted border border-border rounded-md px-4 py-2.5 text-sm text-foreground outline-none focus:ring-1 focus:ring-ring"
+                  className={`w-full bg-muted border rounded-md px-4 py-2.5 text-sm text-foreground outline-none focus:ring-1 focus:ring-ring ${
+                    dateErrors.checkOut ? "border-destructive" : "border-border"
+                  }`}
                 />
+                {dateErrors.checkOut && (
+                  <p className="text-xs text-destructive mt-1">{dateErrors.checkOut}</p>
+                )}
               </div>
             </div>
             <div>
@@ -109,7 +144,7 @@ const Booking = () => {
                 <span className="text-accent">€{room.price * nights}</span>
               </div>
             </div>
-            <Button variant="hero" type="submit" className="w-full">
+            <Button variant="hero" type="submit" className="w-full" disabled={!isFormValid}>
               Pay Now
             </Button>
           </div>

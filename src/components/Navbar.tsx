@@ -10,6 +10,11 @@ const navLinks = [
   { to: "/login", label: "Login" },
 ];
 
+const isActive = (pathname: string, to: string) => {
+  if (to === "/") return pathname === "/";
+  return pathname.startsWith(to);
+};
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
@@ -27,8 +32,10 @@ const Navbar = () => {
             <Link
               key={l.to}
               to={l.to}
-              className={`text-sm tracking-wide uppercase transition-colors hover:text-primary ${
-                location.pathname === l.to ? "text-primary font-semibold" : "text-muted-foreground"
+              className={`relative text-sm tracking-wide uppercase transition-colors hover:text-primary pb-1 ${
+                isActive(location.pathname, l.to)
+                  ? "text-primary font-semibold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:rounded-full"
+                  : "text-muted-foreground"
               }`}
             >
               {l.label}
@@ -54,8 +61,10 @@ const Navbar = () => {
                 key={l.to}
                 to={l.to}
                 onClick={() => setOpen(false)}
-                className={`text-sm tracking-wide uppercase ${
-                  location.pathname === l.to ? "text-primary font-semibold" : "text-muted-foreground"
+                className={`text-sm tracking-wide uppercase py-1 border-l-2 pl-3 transition-colors ${
+                  isActive(location.pathname, l.to)
+                    ? "text-primary font-semibold border-primary"
+                    : "text-muted-foreground border-transparent"
                 }`}
               >
                 {l.label}

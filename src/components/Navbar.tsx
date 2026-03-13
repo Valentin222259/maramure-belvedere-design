@@ -2,12 +2,13 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "./ui/button";
+import { useTranslation } from "react-i18next";
 
 const navLinks = [
-  { to: "/", label: "Home" },
-  { to: "/rooms", label: "Rooms" },
-  { to: "/contact", label: "Contact" },
-  { to: "/login", label: "Login" },
+  { to: "/", labelKey: "nav.home" },
+  { to: "/rooms", labelKey: "nav.rooms" },
+  { to: "/contact", labelKey: "nav.contact" },
+  { to: "/login", labelKey: "nav.login" },
 ];
 
 const isActive = (pathname: string, to: string) => {
@@ -18,6 +19,13 @@ const isActive = (pathname: string, to: string) => {
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
+  const { t, i18n } = useTranslation();
+
+  const toggleLang = () => {
+    const next = i18n.language === "en" ? "ro" : "en";
+    i18n.changeLanguage(next);
+    localStorage.setItem("lang", next);
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
@@ -38,11 +46,17 @@ const Navbar = () => {
                   : "text-muted-foreground"
               }`}
             >
-              {l.label}
+              {t(l.labelKey)}
             </Link>
           ))}
+          <button
+            onClick={toggleLang}
+            className="text-xs font-semibold uppercase tracking-wider border border-border rounded-md px-2.5 py-1.5 text-muted-foreground hover:text-foreground hover:border-primary transition-colors"
+          >
+            {i18n.language === "en" ? "RO" : "EN"}
+          </button>
           <Button variant="hero" size="sm" asChild>
-            <Link to="/booking">Book Now</Link>
+            <Link to="/booking">{t("nav.bookNow")}</Link>
           </Button>
         </div>
 
@@ -67,11 +81,17 @@ const Navbar = () => {
                     : "text-muted-foreground border-transparent"
                 }`}
               >
-                {l.label}
+                {t(l.labelKey)}
               </Link>
             ))}
+            <button
+              onClick={toggleLang}
+              className="text-xs font-semibold uppercase tracking-wider border border-border rounded-md px-2.5 py-1.5 text-muted-foreground hover:text-foreground w-fit"
+            >
+              {i18n.language === "en" ? "RO" : "EN"}
+            </button>
             <Button variant="hero" size="sm" asChild>
-              <Link to="/booking" onClick={() => setOpen(false)}>Book Now</Link>
+              <Link to="/booking" onClick={() => setOpen(false)}>{t("nav.bookNow")}</Link>
             </Button>
           </div>
         </div>

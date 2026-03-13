@@ -16,7 +16,7 @@ const imageMap: Record<string, string> = {
 
 const AdminRooms = () => {
   const { t } = useTranslation();
-  const [rooms, setRooms] = useState(adminRooms);
+  const [rooms, setRooms] = useState<{ id: string; name: string; price: number; status: "active" | "inactive"; image: string }[]>(adminRooms);
 
   const toggleStatus = (id: string) => {
     setRooms((r) => r.map((room) => room.id === id ? { ...room, status: room.status === "active" ? "inactive" as const : "active" as const } : room));

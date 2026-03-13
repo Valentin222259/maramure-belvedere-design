@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link, useLocation, Outlet } from "react-router-dom";
+import { Link, useLocation, Outlet, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   LayoutDashboard,
   CalendarCheck,
@@ -9,21 +10,22 @@ import {
   Settings,
   LogOut,
   Menu,
-  X,
   ChevronLeft,
 } from "lucide-react";
 
 const navItems = [
-  { to: "/admin", icon: LayoutDashboard, label: "Dashboard" },
-  { to: "/admin/bookings", icon: CalendarCheck, label: "Bookings" },
-  { to: "/admin/rooms", icon: BedDouble, label: "Rooms" },
-  { to: "/admin/images", icon: ImageIcon, label: "Images" },
-  { to: "/admin/analytics", icon: BarChart3, label: "Analytics" },
-  { to: "/admin/settings", icon: Settings, label: "Settings" },
+  { to: "/admin", icon: LayoutDashboard, labelKey: "admin.dashboard" },
+  { to: "/admin/bookings", icon: CalendarCheck, labelKey: "admin.bookings" },
+  { to: "/admin/rooms", icon: BedDouble, labelKey: "admin.rooms" },
+  { to: "/admin/images", icon: ImageIcon, labelKey: "admin.images" },
+  { to: "/admin/analytics", icon: BarChart3, labelKey: "admin.analytics" },
+  { to: "/admin/settings", icon: Settings, labelKey: "admin.settings" },
 ];
 
 const AdminLayout = () => {
+  const { t } = useTranslation();
   const location = useLocation();
+  const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -32,9 +34,13 @@ const AdminLayout = () => {
       ? location.pathname === "/admin"
       : location.pathname.startsWith(path);
 
+  const handleLogout = () => {
+    sessionStorage.removeItem("isAdmin");
+    navigate("/login");
+  };
+
   const SidebarContent = () => (
     <div className="flex flex-col h-full">
-      {/* Logo */}
       <div className="h-16 flex items-center px-4 border-b border-sidebar-border">
         {!collapsed && (
           <span className="font-heading text-lg text-sidebar-foreground tracking-wide truncate">
@@ -48,7 +54,6 @@ const AdminLayout = () => {
         )}
       </div>
 
-      {/* Nav */}
       <nav className="flex-1 py-4 px-2 space-y-1">
         {navItems.map((item) => (
           <Link
@@ -62,29 +67,27 @@ const AdminLayout = () => {
             } ${collapsed ? "justify-center" : ""}`}
           >
             <item.icon size={18} />
-            {!collapsed && <span>{item.label}</span>}
+            {!collapsed && <span>{t(item.labelKey)}</span>}
           </Link>
         ))}
       </nav>
 
-      {/* Logout */}
       <div className="p-2 border-t border-sidebar-border">
-        <Link
-          to="/login"
-          className={`flex items-center gap-3 px-3 py-2.5 rounded-md text-sm text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground transition-colors ${
+        <button
+          onClick={handleLogout}
+          className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-md text-sm text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground transition-colors ${
             collapsed ? "justify-center" : ""
           }`}
         >
           <LogOut size={18} />
-          {!collapsed && <span>Logout</span>}
-        </Link>
+          {!collapsed && <span>{t("admin.logout")}</span>}
+        </button>
       </div>
     </div>
   );
 
   return (
     <div className="min-h-screen flex bg-background">
-      {/* Desktop Sidebar */}
       <aside
         className={`hidden lg:flex flex-col bg-sidebar border-r border-sidebar-border transition-all duration-300 ${
           collapsed ? "w-16" : "w-60"
@@ -93,7 +96,6 @@ const AdminLayout = () => {
         <SidebarContent />
       </aside>
 
-      {/* Mobile Sidebar Overlay */}
       {mobileOpen && (
         <div className="lg:hidden fixed inset-0 z-50 flex">
           <div
@@ -106,9 +108,7 @@ const AdminLayout = () => {
         </div>
       )}
 
-      {/* Main Area */}
       <div className="flex-1 flex flex-col min-w-0">
-        {/* Top Bar */}
         <header className="h-16 border-b border-border bg-card flex items-center px-4 gap-3 shrink-0">
           <button
             className="lg:hidden text-foreground"
@@ -126,11 +126,12 @@ const AdminLayout = () => {
             />
           </button>
           <h2 className="font-heading text-lg">
-            {navItems.find((n) => isActive(n.to))?.label || "Admin"}
+            {navItems.find((n) => isActive(n.to))
+              ? t(navItems.find((n) => isActive(n.to))!.labelKey)
+              : "Admin"}
           </h2>
         </header>
 
-        {/* Page Content */}
         <main className="flex-1 overflow-auto p-4 md:p-6">
           <Outlet />
         </main>

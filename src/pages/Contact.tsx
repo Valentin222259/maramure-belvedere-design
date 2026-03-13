@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { MapPin, Phone, Mail, Navigation } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { useTranslation } from "react-i18next";
 
 const directions = [
   { city: "Cluj-Napoca", distance: "160 km", time: "~2.5h" },
@@ -11,105 +12,76 @@ const directions = [
 ];
 
 const Contact = () => {
+  const { t } = useTranslation();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast({ title: "Message Sent!", description: "We'll get back to you within 24 hours." });
+    toast({ title: t("contact.messageSent"), description: t("contact.messageSentDesc") });
     setForm({ name: "", email: "", message: "" });
   };
 
   return (
     <div className="pt-24 pb-20 px-4">
       <div className="container mx-auto max-w-5xl">
-        <h1 className="font-heading text-4xl md:text-5xl text-center mb-4">Contact Us</h1>
-        <p className="text-center text-muted-foreground mb-12 max-w-lg mx-auto">
-          We'd love to hear from you. Reach out with any questions about your stay.
-        </p>
+        <h1 className="font-heading text-4xl md:text-5xl text-center mb-4">{t("contact.title")}</h1>
+        <p className="text-center text-muted-foreground mb-12 max-w-lg mx-auto">{t("contact.subtitle")}</p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Contact Form */}
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="text-xs uppercase tracking-wider text-muted-foreground mb-1 block">Name</label>
-              <input
-                type="text"
-                required
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className="w-full bg-muted border border-border rounded-md px-4 py-2.5 text-sm text-foreground outline-none focus:ring-1 focus:ring-ring"
-              />
+              <label className="text-xs uppercase tracking-wider text-muted-foreground mb-1 block">{t("contact.name")}</label>
+              <input type="text" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full bg-muted border border-border rounded-md px-4 py-2.5 text-sm text-foreground outline-none focus:ring-1 focus:ring-ring" />
             </div>
             <div>
-              <label className="text-xs uppercase tracking-wider text-muted-foreground mb-1 block">Email</label>
-              <input
-                type="email"
-                required
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="w-full bg-muted border border-border rounded-md px-4 py-2.5 text-sm text-foreground outline-none focus:ring-1 focus:ring-ring"
-              />
+              <label className="text-xs uppercase tracking-wider text-muted-foreground mb-1 block">{t("contact.email")}</label>
+              <input type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full bg-muted border border-border rounded-md px-4 py-2.5 text-sm text-foreground outline-none focus:ring-1 focus:ring-ring" />
             </div>
             <div>
-              <label className="text-xs uppercase tracking-wider text-muted-foreground mb-1 block">Message</label>
-              <textarea
-                required
-                rows={5}
-                value={form.message}
-                onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="w-full bg-muted border border-border rounded-md px-4 py-2.5 text-sm text-foreground outline-none focus:ring-1 focus:ring-ring resize-none"
-              />
+              <label className="text-xs uppercase tracking-wider text-muted-foreground mb-1 block">{t("contact.message")}</label>
+              <textarea required rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="w-full bg-muted border border-border rounded-md px-4 py-2.5 text-sm text-foreground outline-none focus:ring-1 focus:ring-ring resize-none" />
             </div>
-            <Button variant="hero" type="submit">
-              Send Message
-            </Button>
+            <Button variant="hero" type="submit">{t("contact.sendMessage")}</Button>
           </form>
 
-          {/* Info + Map */}
           <div className="space-y-8">
             <div className="space-y-4">
               <div className="flex items-start gap-3">
                 <MapPin size={18} className="text-primary mt-0.5" />
                 <div>
-                  <p className="font-heading text-sm">Address</p>
+                  <p className="font-heading text-sm">{t("contact.address")}</p>
                   <p className="text-sm text-muted-foreground">Sat Vadu Izei, Nr. 42, Maramureș 437365, Romania</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Phone size={18} className="text-primary mt-0.5" />
                 <div>
-                  <p className="font-heading text-sm">Phone</p>
+                  <p className="font-heading text-sm">{t("contact.phone")}</p>
                   <p className="text-sm text-muted-foreground">+40 262 330 123</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Mail size={18} className="text-primary mt-0.5" />
                 <div>
-                  <p className="font-heading text-sm">Email</p>
+                  <p className="font-heading text-sm">{t("contact.email")}</p>
                   <p className="text-sm text-muted-foreground">contact@maramures-belvedere.ro</p>
                 </div>
               </div>
             </div>
 
-            {/* Map */}
             <div className="rounded-lg overflow-hidden border border-border">
-              <iframe
-                title="Location Map"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=23.8%2C47.8%2C24.2%2C47.95&layer=mapnik"
-                className="w-full h-56"
-              />
+              <iframe title="Location Map" src="https://www.openstreetmap.org/export/embed.html?bbox=23.8%2C47.8%2C24.2%2C47.95&layer=mapnik" className="w-full h-56" />
             </div>
 
-            {/* Directions */}
             <div>
               <h3 className="font-heading text-lg mb-3 flex items-center gap-2">
                 <Navigation size={16} className="text-primary" />
-                Getting Here
+                {t("contact.gettingHere")}
               </h3>
               <div className="space-y-2">
                 {directions.map((d) => (
                   <div key={d.city} className="flex justify-between text-sm bg-muted rounded-md px-4 py-2">
-                    <span>From {d.city}</span>
+                    <span>{t("contact.from", { city: d.city })}</span>
                     <span className="text-muted-foreground">{d.distance} · {d.time}</span>
                   </div>
                 ))}

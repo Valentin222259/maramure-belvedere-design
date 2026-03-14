@@ -96,6 +96,14 @@
     "tagline": "A boutique mountain retreat nestled in the heart of Maramureș, where tradition meets modern comfort.",
     "quickLinks": "Quick Links",
     "contactUs": "Contact Us",
+    "facilities": "Facilities",
+    "jacuzzi": "Jacuzzi / ciubăr",
+    "bikes": "Free bicycles (8)",
+    "pingPong": "Ping pong table",
+    "sleds": "Sleds (winter)",
+    "grill": "Grill / ceaun",
+    "parking": "Free parking",
+    "playground": "Children's playground",
     "rights": "© {{year}} Maramureș Belvedere. All rights reserved."
   },
   "chatbot": {

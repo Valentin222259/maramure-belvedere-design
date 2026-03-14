@@ -30,7 +30,7 @@ const ChatBot = () => {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<{ from: "bot" | "user"; text: string }[]>([
-    { from: "bot", text: t("chatbot.greeting") },
+    { from: "bot", text: "Bună ziua! Sunt Ion, ghidul tău din Maramureș. Cu ce te pot ajuta?" },
   ]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);

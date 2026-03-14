@@ -70,7 +70,7 @@ const Contact = () => {
             </div>
 
             <div className="rounded-lg overflow-hidden border border-border">
-              <iframe title="Location Map" src="https://www.openstreetmap.org/export/embed.html?bbox=23.8%2C47.8%2C24.2%2C47.95&layer=mapnik" className="w-full h-56" />
+              <iframe title="Location Map" src="https://www.openstreetmap.org/export/embed.html?bbox=24.3700%2C47.7600%2C24.4200%2C47.7900&layer=mapnik&marker=47.7750%2C24.3950" className="w-full h-56" />
             </div>
 
             <div>

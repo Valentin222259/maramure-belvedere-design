@@ -8,7 +8,7 @@ const AdminSettings = () => {
   const { t } = useTranslation();
   const [guesthouse, setGuesthouse] = useState({
     name: "Maramureș Belvedere",
-    address: "Sat Vadu Izei, Nr. 42, Maramureș 437365, Romania",
+    address: "Str. Hera, Nr. 2, Petrova, Maramureș, România",
     phone: "+40 262 330 123",
     email: "contact@maramures-belvedere.ro",
   });

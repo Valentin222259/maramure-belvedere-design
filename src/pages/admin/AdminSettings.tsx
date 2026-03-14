@@ -8,7 +8,7 @@ const AdminSettings = () => {
   const { t } = useTranslation();
   const [guesthouse, setGuesthouse] = useState({
     name: "Maramureș Belvedere",
-    address: "Sat Vadu Izei, Nr. 42, Maramureș 437365, Romania",
+    address: "Str. Hera, Nr. 2, Petrova, Maramureș, România",
     phone: "+40 262 330 123",
     email: "contact@maramures-belvedere.ro",
   });
@@ -18,7 +18,7 @@ const AdminSettings = () => {
   });
 
   const [chatbotKB, setChatbotKB] = useState(
-    `Maramureș Belvedere is a boutique mountain guesthouse located in Vadu Izei, Maramureș, Romania.\n\nWe have 3 rooms: Deluxe Mountain View (€180/night), Fireplace Suite (€280/night), Classic Comfort (€120/night).\n\nCheck-in: 15:00, Check-out: 11:00.\nBreakfast included. Free parking. Free Wi-Fi.\n\nNearby attractions: UNESCO wooden churches, hiking trails, Merry Cemetery (Săpânța), traditional village tours.`
+    `Maramureș Belvedere is a boutique mountain guesthouse located in Petrova, Maramureș, Romania.\n\nWe have 8 rooms:\n- Rooms 1, 2, 3, 4, 6, 7: 250 RON/night (capacity 2)\n- Rooms 5 and 8: 300 RON/night (with bathtub and sofa bed, capacity 3)\n- Extra bed available in any room for +50 RON/night.\n\nCheck-in: 15:00, Check-out: 11:00.\nBreakfast included. Free parking. Free Wi-Fi.\n\nFacilities: Jacuzzi/ciubăr, 8 free bicycles, ping pong table, sleds (winter), grill/ceaun, free parking, children's playground.\n\nNearby attractions: UNESCO wooden churches, hiking trails, Merry Cemetery (Săpânța), traditional village tours.`
   );
 
   const save = () => toast({ title: t("admin.settingsSaved") });

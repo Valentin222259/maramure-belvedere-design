@@ -39,17 +39,17 @@ const Rooms = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filtered.map((room) => (
-            <div key={room.id} className="bg-card rounded-lg overflow-hidden border border-border shadow-sm hover:shadow-md transition-shadow">
+            <div key={room.id} className="bg-card rounded-lg overflow-hidden border border-border shadow-sm hover:shadow-md transition-shadow flex flex-col">
               <img src={room.image} alt={room.name} className="w-full h-56 object-cover" />
-              <div className="p-6">
+              <div className="p-6 flex flex-col flex-1">
                 <h3 className="font-heading text-xl mb-2">{room.name}</h3>
-                <p className="text-muted-foreground text-sm mb-3">{room.shortDescription}</p>
+                <p className="text-muted-foreground text-sm mb-3 flex-1">{room.shortDescription}</p>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
                   <Users size={14} />
                   <span>{t("roomsPage.upToGuests", { count: room.capacity })}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="font-heading text-lg text-accent">€{room.price}<span className="text-sm text-muted-foreground font-body">{t("ourRooms.perNight")}</span></span>
+                  <span className="font-heading text-lg text-accent">{room.price} RON<span className="text-sm text-muted-foreground font-body">{t("ourRooms.perNight")}</span></span>
                   <Button size="sm" asChild>
                     <Link to={`/rooms/${room.id}`}>{t("ourRooms.viewRoom")}</Link>
                   </Button>

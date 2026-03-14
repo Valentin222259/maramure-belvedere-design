@@ -22,9 +22,9 @@ const Rooms = () => {
 
         <div className="flex flex-wrap gap-6 items-end mb-12 bg-card border border-border rounded-lg p-6">
           <div className="flex flex-col gap-1">
-            <label className="text-xs uppercase tracking-wider text-muted-foreground">{t("roomsPage.maxPrice")}</label>
+    <label className="text-xs uppercase tracking-wider text-muted-foreground">{t("roomsPage.maxPrice")}</label>
             <input type="range" min={50} max={500} value={maxPrice} onChange={(e) => setMaxPrice(Number(e.target.value))} className="w-40 accent-primary" />
-            <span className="text-sm text-foreground">{t("roomsPage.upTo", { price: maxPrice })}</span>
+            <span className="text-sm text-foreground">{t("roomsPage.upTo", { price: maxPrice })} RON</span>
           </div>
           <div className="flex flex-col gap-1">
             <label className="text-xs uppercase tracking-wider text-muted-foreground">{t("roomsPage.minGuests")}</label>

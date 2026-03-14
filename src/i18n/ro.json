@@ -39,8 +39,8 @@
   "roomsPage": {
     "title": "Camerele Noastre",
     "subtitle": "Găsiți camera perfectă pentru evadarea dumneavoastră la munte.",
-    "maxPrice": "Preț maxim (€)",
-    "upTo": "Până la €{{price}}",
+    "maxPrice": "Preț maxim (RON)",
+    "upTo": "Până la {{price}}",
     "minGuests": "Oaspeți minimi",
     "any": "Oricare",
     "upToGuests": "Până la {{count}} oaspeți",

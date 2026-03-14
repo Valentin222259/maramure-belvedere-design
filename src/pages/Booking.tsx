@@ -89,7 +89,7 @@ const Booking = () => {
               </div>
               <div className="flex justify-between font-heading text-lg mt-3 pt-3 border-t border-border">
                 <span>{t("booking.total")}</span>
-                <span className="text-accent">€{room.price * nights}</span>
+                <span className="text-accent">{room.price * nights} RON</span>
               </div>
             </div>
             <Button variant="hero" type="submit" className="w-full" disabled={!isFormValid}>{t("booking.payNow")}</Button>

@@ -81,7 +81,7 @@ const RoomDetail = () => {
 
           <div className="bg-card border border-border rounded-lg p-6 h-fit sticky top-24">
             <p className="text-muted-foreground text-sm mb-1">{t("roomDetail.from")}</p>
-            <p className="font-heading text-3xl text-accent mb-1">€{room.price}</p>
+            <p className="font-heading text-3xl text-accent mb-1">{room.price} RON</p>
             <p className="text-sm text-muted-foreground mb-6">{t("roomDetail.perNight")}</p>
             <Button variant="hero" className="w-full" asChild>
               <Link to={`/booking?room=${room.id}`}>{t("roomDetail.reserveNow")}</Link>

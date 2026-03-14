@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { MapPin, Phone, Mail, Facebook, Instagram } from "lucide-react";
+import { MapPin, Phone, Mail, Facebook, Instagram, MessageCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const Footer = () => {
@@ -7,7 +7,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-primary text-primary-foreground">
-      <div className="container mx-auto px-4 py-8 md:py-10 grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div className="container mx-auto px-4 py-8 md:py-10 grid grid-cols-1 md:grid-cols-3 gap-10 justify-items-center text-center md:text-left">
         <div>
           <h3 className="font-heading text-2xl mb-4">Maramureș Belvedere</h3>
           <p className="text-primary-foreground/80 text-sm leading-relaxed">{t("footer.tagline")}</p>
@@ -30,6 +30,7 @@ const Footer = () => {
             <div className="flex items-center gap-3 mt-2">
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors"><Facebook size={18} /></a>
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors"><Instagram size={18} /></a>
+              <a href="https://wa.me/40745489362" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors"><MessageCircle size={18} /></a>
             </div>
           </div>
         </div>

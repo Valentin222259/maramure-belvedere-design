@@ -39,8 +39,8 @@
   "roomsPage": {
     "title": "Our Rooms",
     "subtitle": "Find the perfect room for your mountain escape.",
-    "maxPrice": "Max Price (€)",
-    "upTo": "Up to €{{price}}",
+    "maxPrice": "Max Price (RON)",
+    "upTo": "Up to {{price}}",
     "minGuests": "Min Guests",
     "any": "Any",
     "upToGuests": "Up to {{count}} guests",

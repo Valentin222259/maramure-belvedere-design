@@ -48,13 +48,13 @@ const Index = () => {
           <p className="text-center text-muted-foreground mb-12 max-w-lg mx-auto">{t("ourRooms.subtitle")}</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {rooms.map((room) => (
-              <div key={room.id} className="bg-card rounded-lg overflow-hidden border border-border shadow-sm hover:shadow-md transition-shadow">
+              <div key={room.id} className="bg-card rounded-lg overflow-hidden border border-border shadow-sm hover:shadow-md transition-shadow flex flex-col">
                 <img src={room.image} alt={room.name} className="w-full h-56 object-cover" />
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-1">
                   <h3 className="font-heading text-xl mb-2">{room.name}</h3>
-                  <p className="text-muted-foreground text-sm mb-4">{room.shortDescription}</p>
+                  <p className="text-muted-foreground text-sm mb-4 flex-1">{room.shortDescription}</p>
                   <div className="flex items-center justify-between">
-                    <span className="font-heading text-lg text-accent">€{room.price}<span className="text-sm text-muted-foreground font-body">{t("ourRooms.perNight")}</span></span>
+                    <span className="font-heading text-lg text-accent">{room.price} RON<span className="text-sm text-muted-foreground font-body">{t("ourRooms.perNight")}</span></span>
                     <Button size="sm" asChild>
                       <Link to={`/rooms/${room.id}`}>{t("ourRooms.viewRoom")}</Link>
                     </Button>

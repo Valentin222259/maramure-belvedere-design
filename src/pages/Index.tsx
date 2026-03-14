@@ -54,7 +54,7 @@ const Index = () => {
                   <h3 className="font-heading text-xl mb-2">{room.name}</h3>
                   <p className="text-muted-foreground text-sm mb-4">{room.shortDescription}</p>
                   <div className="flex items-center justify-between">
-                    <span className="font-heading text-lg text-accent">€{room.price}<span className="text-sm text-muted-foreground font-body">{t("ourRooms.perNight")}</span></span>
+                    <span className="font-heading text-lg text-accent">{room.price} RON<span className="text-sm text-muted-foreground font-body">{t("ourRooms.perNight")}</span></span>
                     <Button size="sm" asChild>
                       <Link to={`/rooms/${room.id}`}>{t("ourRooms.viewRoom")}</Link>
                     </Button>

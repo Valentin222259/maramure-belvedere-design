@@ -50,7 +50,7 @@ const Contact = () => {
                 <MapPin size={18} className="text-primary mt-0.5" />
                 <div>
                   <p className="font-heading text-sm">{t("contact.address")}</p>
-                  <p className="text-sm text-muted-foreground">Sat Vadu Izei, Nr. 42, Maramureș 437365, Romania</p>
+                  <p className="text-sm text-muted-foreground">Str. Hera, Nr. 2, Petrova, Maramureș, România</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">

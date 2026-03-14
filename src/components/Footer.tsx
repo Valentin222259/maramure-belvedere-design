@@ -8,7 +8,7 @@ const Footer = () => {
   const facilities = [
     { icon: Waves, label: t("footer.jacuzzi") },
     { icon: Bike, label: t("footer.bikes") },
-    { icon: TableTennis, label: t("footer.pingPong") },
+    { icon: CircleDot, label: t("footer.pingPong") },
     { icon: Snowflake, label: t("footer.sleds") },
     { icon: Flame, label: t("footer.grill") },
     { icon: Car, label: t("footer.parking") },

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { MapPin, Phone, Mail, Waves, Bike, TableTennis, Snowflake, Flame, Car, Baby, Facebook, Instagram } from "lucide-react";
+import { MapPin, Phone, Mail, Waves, Bike, CircleDot, Snowflake, Flame, Car, Baby, Facebook, Instagram } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const Footer = () => {

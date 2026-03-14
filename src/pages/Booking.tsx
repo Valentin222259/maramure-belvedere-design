@@ -84,8 +84,8 @@ const Booking = () => {
             </p>
             <div className="border-t border-border pt-4 mb-6">
               <div className="flex justify-between text-sm mb-1">
-                <span>€{room.price} × {nights} {nights > 1 ? t("booking.nights") : t("booking.night")}</span>
-                <span>€{room.price * nights}</span>
+                <span>{room.price} RON × {nights} {nights > 1 ? t("booking.nights") : t("booking.night")}</span>
+                <span>{room.price * nights} RON</span>
               </div>
               <div className="flex justify-between font-heading text-lg mt-3 pt-3 border-t border-border">
                 <span>{t("booking.total")}</span>
